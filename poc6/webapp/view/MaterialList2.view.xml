@@ -1,0 +1,50 @@
+<mvc:View
+    controllerName="btp.poc.poc6.controller.MaterialList2"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+	<Table
+        growing="true"
+        growingThreshold="10"
+        items="{
+            path: 'agingSrvModel>/Marcs'
+        }">
+        <columns>
+            <Column width="12rem">
+                <Text text="MATNR"/>
+            </Column>
+            <Column width="6rem">
+                <Text text="WERKS"/>
+            </Column>
+            <Column>
+                <Text text="PSTAT"/>
+            </Column>
+            <Column width="12rem">
+                <Text text="DISPO"/>
+            </Column>
+            <Column width="8rem">
+                <Text text="DSNAM"/>
+            </Column>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{agingSrvModel>matnr}"/>
+                </cells>
+                <cells>
+                    <Text text="{agingSrvModel>werks}"/>
+                </cells>
+                <cells>
+                    <Text text="{agingSrvModel>pstat}"/>
+                </cells>
+                <cells>
+                    <Text text="{agingSrvModel>dispo}"/>
+                </cells>
+                <cells>
+                    <Text text="{agingSrvModel>dsnam}"/>
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+</mvc:View>

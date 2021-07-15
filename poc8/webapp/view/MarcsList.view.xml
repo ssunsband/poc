@@ -1,0 +1,194 @@
+<mvc:View
+    controllerName="poc8.controller.MarcsList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns="sap.m"
+    busyIndicatorDelay="0"
+    displayBlock="true">
+    <f:DynamicPage headerExpanded="true" toggleHeaderOnTitleClick="true">
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="저장위치별 재고  Aging 상태 조회"/>
+                </f:heading>
+                <f:actions>
+                    <Button
+                            text="조회"
+                            type="Emphasized"
+                            press=".onSearch"/>
+                </f:actions>
+            </f:DynamicPageTitle>
+        </f:title>
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <form:SimpleForm
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    adjustLabelSpan="false">
+                    <form:content>
+
+                        <VBox>
+                            <Label text="Plant" required="true" />
+                            <ComboBox width="100%" 
+                                placeholder="ALL"
+                                selectedKey="{filterModel>/plant}"
+                                showSecondaryValues= "true"
+                                items="{agingSrvModel>/Plants}">
+                                <items>
+                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                </items>
+                            </ComboBox>
+                            <layoutData>
+                                <layout:GridData span="XL2 L3 M6 S12" />
+                            </layoutData>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Storage Location" />
+                            <MultiComboBox width="100%" 
+                                placeholder="ALL"
+                                selectedKeys="{filterModel>/storageLocation}"
+                                showSecondaryValues= "true"
+                                items="{agingSrvModel>/Plants}">
+                                <items>
+                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                </items>
+                            </MultiComboBox>
+                            <layoutData>
+                                <layout:GridData span="XL2 L3 M6 S12" />
+                            </layoutData>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Material" />
+                            <MultiComboBox width="100%" 
+                                placeholder="ALL"
+                                selectedKeys="{filterModel>/material}"
+                                showSecondaryValues= "true"
+                                items="{agingSrvModel>/Plants}">
+                                <items>
+                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                </items>
+                            </MultiComboBox>
+                            <layoutData>
+                                <layout:GridData span="XL2 L3 M6 S12" />
+                            </layoutData>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Material Type" />
+                            <MultiComboBox width="100%" 
+                                placeholder="ALL"
+                                selectedKeys="{filterModel>/materialType}"
+                                showSecondaryValues= "true"
+                                items="{agingSrvModel>/Plants}">
+                                <items>
+                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                </items>
+                            </MultiComboBox>
+                            <layoutData>
+                                <layout:GridData span="XL2 L3 M6 S12" />
+                            </layoutData>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Material Group" />
+                            <MultiComboBox width="100%" 
+                                placeholder="ALL"
+                                selectedKeys="{filterModel>/materialGroup}"
+                                showSecondaryValues= "true"
+                                items="{agingSrvModel>/Matgrs}">
+                                <items>
+                                    <core:ListItem key="{agingSrvModel>matkl}" text="{agingSrvModel>matkl}" additionalText="{agingSrvModel>wgbez}" />
+                                </items>
+                            </MultiComboBox>
+                            <layoutData>
+                                <layout:GridData span="XL2 L3 M6 S12" />
+                            </layoutData>
+                        </VBox>
+
+                        <VBox>
+                            <Label text="Baseline Date" />
+                            <DatePicker value="{filterModel>/baselineDate}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" />
+                            <layoutData>
+                                <layout:GridData span="XL2 L3 M6 S12" />
+                            </layoutData>
+                        </VBox>
+                    </form:content>
+                </form:SimpleForm>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table
+                growing="true"
+                growingThreshold="10"
+                items="{
+                    path: 'listModel>/Marcs'
+                }">
+                <columns>
+                    <Column width="12rem">
+                        <Text text="MATNR"/>
+                    </Column>
+                    <Column width="8rem">
+                        <Text text="WERKS"/>
+                    </Column>
+                    <Column width="10rem">
+                        <Text text="PSTAT"/>
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="DISPO"/>
+                    </Column>
+                    <Column>
+                        <Text text="DSNAM"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text text="{listModel>matnr}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{listModel>werks}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{listModel>pstat}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{listModel>dispo}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{listModel>dsnam}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            <!-- <smartTable:SmartTable id="LineItemsSmartTable" 
+                        entitySet="Marcs" 
+                        tableType="Table" 
+                        useExportToExcel="true" 
+                        beforeExport="onBeforeExport" 
+                        useVariantManagement="true" 
+                        useTablePersonalisation="true" 
+                        header="Line Items" 
+                        showRowCount="true" 
+                        persistencyKey="SmartTableAnalytical_Explored" 
+                        enableAutoBinding="true" 
+                        class="sapUiResponsiveContentPadding" 
+                        editTogglable="true" 
+                        app:useSmartToggle="true">
+				<smartTable:layoutData>
+					<FlexItemData growFactor="1" baseSize="0%"/>
+				</smartTable:layoutData>
+			</smartTable:SmartTable> -->
+        </f:content>
+    </f:DynamicPage>
+
+</mvc:View>

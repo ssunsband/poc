@@ -1,0 +1,123 @@
+<mvc:View
+    controllerName="poc7.controller.MarasList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns="sap.m"
+    busyIndicatorDelay="0"
+    displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="MARAS List">
+					<content >
+                        <!-- <t:Table
+                            rows="{mainModel>/Maras}"
+                            selectionMode="None"
+                            enableColumnFreeze="true"
+                            visibleRowCountMode="Auto">
+                            <t:Column width="12rem">
+                                <Label text="MATNR" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>matnr}" tooltip="{mainModel>matnr}" textAlign="Center" width="100%" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem">
+                                <Label text="MTART" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>mtart}" tooltip="{mainModel>mtart}" textAlign="Center" width="100%" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="MTBEZ" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>mtbez}" tooltip="{mainModel>mtbez}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="12rem">
+                                <Label text="PSTAT" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>pstat}" tooltip="{mainModel>pstat}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="8rem">
+                                <Label text="MATKL" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>matkl}" tooltip="{mainModel>matkl}" textAlign="Center" width="100%" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column>
+                                <Label text="WGBEZ" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>wgbez}" tooltip="{mainModel>wgbez}" />
+                                </t:template>
+                            </t:Column>
+                            <t:Column width="6rem">
+                                <Label text="MEINS" textAlign="Center" width="100%" />
+                                <t:template>
+                                    <Text text="{mainModel>meins}" tooltip="{mainModel>meins}" textAlign="Center" width="100%" />
+                                </t:template>
+                            </t:Column>
+                        </t:Table> -->
+
+                        <Table
+							growing="true"
+							growingThreshold="10"
+							items="{
+								path: 'mainModel>/Maras'
+							}">
+							<columns>
+								<Column width="12rem">
+									<Text text="MATNR"/>
+								</Column>
+								<Column width="6rem">
+									<Text text="MTART"/>
+								</Column>
+								<Column>
+									<Text text="MTBEZ"/>
+								</Column>
+								<Column width="12rem">
+									<Text text="PSTAT"/>
+								</Column>
+                                <Column width="8rem">
+									<Text text="MATKL"/>
+								</Column>
+                                <Column>
+									<Text text="WGBEZ"/>
+								</Column>
+                                <Column width="6rem">
+									<Text text="MEINS"/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{mainModel>matnr}"/>
+									</cells>
+									<cells>
+										<Text text="{mainModel>mtart}"/>
+									</cells>
+									<cells>
+										<Text text="{mainModel>mtbez}"/>
+									</cells>
+									<cells>
+										<Text text="{mainModel>pstat}"/>
+									</cells>
+                                    <cells>
+										<Text text="{mainModel>matkl}"/>
+									</cells>
+                                    <cells>
+										<Text text="{mainModel>wgbez}"/>
+									</cells>
+                                    <cells>
+										<Text text="{mainModel>meins}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content >
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

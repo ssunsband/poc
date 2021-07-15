@@ -1,0 +1,27 @@
+<mvc:View
+    controllerName="poc4.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    displayBlock="true"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content >
+                        <Text text="poc test" />
+                        <Button text="get" press=".onGetMetalData" />
+                        <Text text="a" />
+                        <ComboBox
+                                selectedKey="{listModel>vi_type_code}"
+                                items="{mmODataModel>/Plants}"
+                                change="onChangeViType">
+                                <core:ListItem key="{mmODataModel>name1}" text="{mmODataModel>name1}"/>
+                            </ComboBox>
+					</content >
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
