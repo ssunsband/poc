@@ -4,6 +4,7 @@
     xmlns:core="sap.ui.core"
     xmlns:f="sap.f"
     xmlns:form="sap.ui.layout.form"
+    xmlns:t="sap.ui.table"
     xmlns:layout="sap.ui.layout"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
@@ -16,13 +17,17 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="저장위치별 재고  Aging 상태 조회"/>
+                    <Title text="{i18n>agingTitle}"/>
                 </f:heading>
                 <f:actions>
                     <Button
-                            text="조회"
+                            text="{i18n>SEARCH}"
                             type="Emphasized"
                             press=".onSearch"/>
+                    <Button
+                            text="{i18n>SEARCH}2"
+                            type="Emphasized"
+                            press=".onSearch2"/>
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -36,12 +41,13 @@
                     <form:content>
 
                         <VBox>
-                            <Label text="Plant" required="true" />
+                            <Label text="{i18n>PLANT}" required="true" />
                             <ComboBox width="100%" 
                                 placeholder="ALL"
                                 selectedKey="{filterModel>/plant}"
                                 showSecondaryValues= "true"
-                                items="{agingSrvModel>/Plants}">
+                                items="{agingSrvModel>/Plants}"
+                                change=".onChangePlant">
                                 <items>
                                     <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
                                 </items>
@@ -52,14 +58,14 @@
                         </VBox>
 
                         <VBox>
-                            <Label text="Storage Location" />
+                            <Label text="{i18n>STORAGE} {i18n>LOCATION}" />
                             <MultiComboBox width="100%" 
                                 placeholder="ALL"
                                 selectedKeys="{filterModel>/storageLocation}"
                                 showSecondaryValues= "true"
-                                items="{agingSrvModel>/Plants}">
+                                items="{rootModel>/storageLocation}">
                                 <items>
-                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                    <core:ListItem key="{rootModel>lgort}" text="{rootModel>lgort}" additionalText="{rootModel>lgobe}" />
                                 </items>
                             </MultiComboBox>
                             <layoutData>
@@ -68,14 +74,14 @@
                         </VBox>
 
                         <VBox>
-                            <Label text="Material" />
+                            <Label text="{i18n>MATERIAL}" />
                             <MultiComboBox width="100%" 
                                 placeholder="ALL"
                                 selectedKeys="{filterModel>/material}"
                                 showSecondaryValues= "true"
-                                items="{agingSrvModel>/Plants}">
+                                items="{rootModel>/Maras}">
                                 <items>
-                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                    <core:ListItem key="{rootModel>matnr_show}" text="{rootModel>matnr_show}" additionalText="{rootModel>makts/0/maktx}" />
                                 </items>
                             </MultiComboBox>
                             <layoutData>
@@ -84,14 +90,14 @@
                         </VBox>
 
                         <VBox>
-                            <Label text="Material Type" />
+                            <Label text="{i18n>MATERIAL} {i18n>TYPE}" />
                             <MultiComboBox width="100%" 
                                 placeholder="ALL"
                                 selectedKeys="{filterModel>/materialType}"
                                 showSecondaryValues= "true"
-                                items="{agingSrvModel>/Plants}">
+                                items="{agingSrvModel>/Mattys}">
                                 <items>
-                                    <core:ListItem key="{agingSrvModel>werks}" text="{agingSrvModel>werks}" additionalText="{agingSrvModel>name1}" />
+                                    <core:ListItem key="{agingSrvModel>mtart}" text="{agingSrvModel>mtart}" additionalText="{agingSrvModel>mtbez}" />
                                 </items>
                             </MultiComboBox>
                             <layoutData>
@@ -100,7 +106,7 @@
                         </VBox>
 
                         <VBox>
-                            <Label text="Material Group" />
+                            <Label text="{i18n>MATERIAL} {i18n>GROUP}" />
                             <MultiComboBox width="100%" 
                                 placeholder="ALL"
                                 selectedKeys="{filterModel>/materialGroup}"
@@ -116,7 +122,7 @@
                         </VBox>
 
                         <VBox>
-                            <Label text="Baseline Date" />
+                            <Label text="{i18n>BASELINE} {i18n>DATE}" required="true" />
                             <DatePicker value="{filterModel>/baselineDate}" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" />
                             <layoutData>
                                 <layout:GridData span="XL2 L3 M6 S12" />
@@ -127,27 +133,173 @@
             </f:DynamicPageHeader>
         </f:header>
         <f:content>
-            <Table
+            <t:Table
+                selectionMode="None"
+                rows="{listModel>/Agings}"
+                visibleRowCountMode="Auto">
+                <t:columns>
+                    <t:Column width="8rem">
+                        <Label text="{i18n>MATERIAL}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>matnr',
+                                         formatter: '.onMatnrFormat'}" textAlign="Center" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="25rem" >
+                        <Label text="{i18n>MATERIAL}{i18n>DESCRIPTION}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>maktx}" tooltip="{listModel>maktx}" wrapping="false"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem">
+                        <Label text="{i18n>PLANT}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>werks}" textAlign="Center" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem">
+                        <Label text="{i18n>SLOC}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>lgort}" textAlign="Center" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="10rem">
+                        <Label text="{i18n>SLOC} {i18n>DESC}." textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>lgobe}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="4rem">
+                        <Label text="{i18n>UNIT}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>meins}" textAlign="Center" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="8rem" >
+                        <Label text="{i18n>STOCK}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_0_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="7rem">
+                        <Label text="{i18n>LAST} {i18n>GR} {i18n>DATE}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>gr_date}" textAlign="Center" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="7rem">
+                        <Label text="{i18n>LAST} {i18n>GI} {i18n>DATE}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{listModel>gi_date}" textAlign="Center" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem" >
+                        <Label text="0 ~ 1 {i18n>MONTH}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_1_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem" >
+                        <Label text="1 ~ 2 {i18n>MONTH}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_2_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem" >
+                        <Label text="2 ~ 3 {i18n>MONTH}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_3_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem" >
+                        <Label text="4 ~ 6 {i18n>MONTH}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_6_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem" >
+                        <Label text="7 ~ 9 {i18n>MONTH}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_9_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="7rem" >
+                        <Label text="10 ~ 12 {i18n>MONTH}" textAlign="Center" width="100%"/>
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_12_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="6rem">
+                        <Label text="12 {i18n>MONTH} ~ " textAlign="Center" width="100%" />
+                        <t:template>
+                            <Text text="{path: 'listModel>before_month_13_menge',
+                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+            <!-- <Table
                 growing="true"
-                growingThreshold="10"
+                growingThreshold="30"
+                sticky="ColumnHeaders"
                 items="{
-                    path: 'listModel>/Marcs'
+                    path: 'listModel>/Agings'
                 }">
                 <columns>
                     <Column width="12rem">
-                        <Text text="MATNR"/>
+                        <Text text="{i18n>MATERIAL}"/>
                     </Column>
-                    <Column width="8rem">
-                        <Text text="WERKS"/>
-                    </Column>
-                    <Column width="10rem">
-                        <Text text="PSTAT"/>
+                    <Column width="20rem" >
+                        <Text text="{i18n>MATERIAL}{i18n>DESCRIPTION}"/>
                     </Column>
                     <Column width="6rem">
-                        <Text text="DISPO"/>
+                        <Text text="{i18n>PLANT}"/>
                     </Column>
-                    <Column>
-                        <Text text="DSNAM"/>
+                    <Column width="6rem">
+                        <Text text="{i18n>SLOC}"/>
+                    </Column>
+                    <Column width="10rem">
+                        <Text text="{i18n>SLOC} {i18n>DESC}."/>
+                    </Column>
+                    <Column width="4rem">
+                        <Text text="{i18n>UNIT}"/>
+                    </Column>
+                    <Column width="4rem" >
+                        <Text text="{i18n>STOCK}"/>
+                    </Column>
+                    <Column width="7rem">
+                        <Text text="{i18n>LAST} {i18n>GR} {i18n>DATE}"/>
+                    </Column>
+                    <Column width="6rem">
+                        <Text text="{i18n>LAST} {i18n>GI} {i18n>DATE}"/>
+                    </Column>
+                    <Column width="6rem" >
+                        <Text text="0 ~ 1 {i18n>MONTH}"/>
+                    </Column>
+                    <Column width="6rem" >
+                        <Text text="1 ~ 2 {i18n>MONTH}"/>
+                    </Column>
+                    <Column width="6rem" >
+                        <Text text="2 ~ 3 {i18n>MONTH}"/>
+                    </Column>
+                    <Column width="6rem" >
+                        <Text text="4 ~ 6 {i18n>MONTH}"/>
+                    </Column>
+                    <Column width="6rem" >
+                        <Text text="7 ~ 9 {i18n>MONTH}"/>
+                    </Column>
+                    <Column width="7rem" >
+                        <Text text="10 ~ 12 {i18n>MONTH}"/>
+                    </Column>
+                    <Column width="6rem" >
+                        <Text text="12 {i18n>MONTH} ~ "/>
                     </Column>
                 </columns>
                 <items>
@@ -156,38 +308,61 @@
                             <Text text="{listModel>matnr}"/>
                         </cells>
                         <cells>
+                            <Text text="{listModel>maktx}" tooltip="{listModel>maktx}" wrapping="false"/>
+                        </cells>
+                        <cells>
                             <Text text="{listModel>werks}"/>
                         </cells>
                         <cells>
-                            <Text text="{listModel>pstat}"/>
+                            <Text text="{listModel>lgort}"/>
                         </cells>
                         <cells>
-                            <Text text="{listModel>dispo}"/>
+                            <Text text="{listModel>lgobe}"/>
                         </cells>
                         <cells>
-                            <Text text="{listModel>dsnam}"/>
+                            <Text text="{listModel>meins}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_0_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{listModel>gr_date}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{listModel>gi_date}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_1_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_2_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_3_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_6_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_9_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_12_menge',
+                                         formatter: '.numberFormat'}"/>
+                        </cells>
+                        <cells>
+                            <Text text="{path: 'listModel>before_month_13_menge',
+                                         formatter: '.numberFormat'}"/>
                         </cells>
                     </ColumnListItem>
                 </items>
-            </Table>
-            <!-- <smartTable:SmartTable id="LineItemsSmartTable" 
-                        entitySet="Marcs" 
-                        tableType="Table" 
-                        useExportToExcel="true" 
-                        beforeExport="onBeforeExport" 
-                        useVariantManagement="true" 
-                        useTablePersonalisation="true" 
-                        header="Line Items" 
-                        showRowCount="true" 
-                        persistencyKey="SmartTableAnalytical_Explored" 
-                        enableAutoBinding="true" 
-                        class="sapUiResponsiveContentPadding" 
-                        editTogglable="true" 
-                        app:useSmartToggle="true">
-				<smartTable:layoutData>
-					<FlexItemData growFactor="1" baseSize="0%"/>
-				</smartTable:layoutData>
-			</smartTable:SmartTable> -->
+            </Table> -->
         </f:content>
     </f:DynamicPage>
 

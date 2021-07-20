@@ -16,7 +16,15 @@
                 "uri": "/odata/v4/material.AgingSrv/",
                 "type": "OData",
                 "settings": {
-                    "odataVersion": "2.0",
+                    "odataVersion": "4.0",
+                    "localUri": "localService/metadata.xml"
+                }
+            },
+            "testService": {
+                "uri": "/odata/v4/material.AgingSrv/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "4.0",
                     "localUri": "localService/metadata.xml"
                 }
             },
@@ -77,12 +85,21 @@
                 "dataSource": "mainService",
                 "preload": true,
                 "settings": {
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline",
-                    "refreshAfterChange": true,
-                    "useBatch": true
+                    "synchronizationMode" : "None"
                 }
                
+            },
+            "testModel": {
+                "dataSource": "testService",
+                "preload": true,
+                "type" : "sap.ui.model.odata.v2.ODataModel",
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+                    "defaultCountMode": "Inline",
+                    "operationMode" : "Server",
+                    "refreshAfterChange": false,
+                    "useBatch": true
+                }
             },
             "agingSrvModel": {
                 "dataSource": "agingSrv",
