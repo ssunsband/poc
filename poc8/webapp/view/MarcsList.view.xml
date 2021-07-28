@@ -24,10 +24,10 @@
                             text="{i18n>SEARCH}"
                             type="Emphasized"
                             press=".onSearch"/>
-                    <Button
+                    <!-- <Button
                             text="{i18n>SEARCH}2"
                             type="Emphasized"
-                            press=".onSearch2"/>
+                            press=".onSearch2"/> -->
                 </f:actions>
             </f:DynamicPageTitle>
         </f:title>
@@ -179,7 +179,9 @@
                         <Label text="{i18n>STOCK}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_0_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}"
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_0_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="7rem">
@@ -198,49 +200,63 @@
                         <Label text="0 ~ 1 {i18n>MONTH}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_1_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}" 
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_1_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="6rem" >
                         <Label text="1 ~ 2 {i18n>MONTH}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_2_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}" 
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_2_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="6rem" >
                         <Label text="2 ~ 3 {i18n>MONTH}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_3_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}"
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_3_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="6rem" >
                         <Label text="4 ~ 6 {i18n>MONTH}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_6_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}"
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_6_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="6rem" >
                         <Label text="7 ~ 9 {i18n>MONTH}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_9_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}"
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_9_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="7rem" >
                         <Label text="10 ~ 12 {i18n>MONTH}" textAlign="Center" width="100%"/>
                         <t:template>
                             <Text text="{path: 'listModel>before_month_12_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}"
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_12_menge}}" />
                         </t:template>
                     </t:Column>
                     <t:Column width="6rem">
                         <Label text="12 {i18n>MONTH} ~ " textAlign="Center" width="100%" />
                         <t:template>
                             <Text text="{path: 'listModel>before_month_13_menge',
-                                         formatter: '.numberFormat'}" textAlign="End" width="100%"/>
+                                         formatter: '.numberFormat'}"
+                                textAlign="End" width="100%"
+                                visible="{= !!${listModel>before_month_13_menge}}" />
                         </t:template>
                     </t:Column>
                 </t:columns>
