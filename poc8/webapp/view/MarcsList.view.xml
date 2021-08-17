@@ -23,7 +23,7 @@
                     <Button
                             text="{i18n>SEARCH}"
                             type="Emphasized"
-                            press=".onSearch"/>
+                            press=".onSearch" />
                     <!-- <Button
                             text="{i18n>SEARCH}2"
                             type="Emphasized"
